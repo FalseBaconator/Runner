@@ -27,9 +27,10 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             rb.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         }
-        if (Input.GetButton("Down") && canJump)
+        if (Input.GetButtonDown("Down") && canJump)
         {
             gameObject.layer = passThroughPlatform;
+            rb.velocity = new Vector2(0, 0);
             transform.position = new Vector2(transform.position.x, transform.position.y - dropHeight);
         }
         if (Input.GetButtonUp("Down"))
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if(!canJump)
             canJump = true;
@@ -46,7 +47,8 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        canJump = false;
+        if(canJump)
+            canJump = false;
     }
 
 }
