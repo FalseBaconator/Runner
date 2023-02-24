@@ -48,7 +48,7 @@ MonoBehaviour:
   coin: {fileID: 9165190237136711315, guid: 83db2bf907e86ff428c01b0d798645ed, type: 3}
   coinHeight: 0.5
   coinHeight2: 2
-  platormLengthMin: 5
+  platormLengthMin: 7
   platormLengthMax: 10
   spawnHeightVariance: 4
   spawnHeightMinDist: 2
