@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             rb.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         }
-        if (Input.GetButtonDown("Down") && canJump)
+        if (Input.GetButton("Down") && canJump)
         {
             gameObject.layer = passThroughPlatform;
             transform.position = new Vector2(transform.position.x, transform.position.y - dropHeight);
