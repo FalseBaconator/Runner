@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         Camera cam = Camera.main;
         spawnX = cam.orthographicSize * cam.aspect;
         player = GameObject.FindGameObjectWithTag("Player");
+        GameObject.FindGameObjectWithTag("ScoreHolder").GetComponent<ScoreHolder>().Score = 0;
     }
 
     // Update is called once per frame

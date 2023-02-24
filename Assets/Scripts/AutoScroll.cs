@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AutoScroll : MonoBehaviour
 {
 
     public float speed;
     Camera cam;
+    TextMeshProUGUI text;
 
     // Start is called before the first frame update
     void Start()
@@ -23,4 +25,16 @@ public class AutoScroll : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameObject.FindGameObjectWithTag("ScoreHolder").GetComponent<ScoreHolder>().Score++;
+            text = GameObject.FindGameObjectWithTag("Text").GetComponent<TextMeshProUGUI>();
+            text.text = "COINS: " + GameObject.FindGameObjectWithTag("ScoreHolder").GetComponent<ScoreHolder>().Score++;
+            Destroy(gameObject);
+        }
+    }
+
 }
