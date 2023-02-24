@@ -21,9 +21,11 @@ public class GameManager : MonoBehaviour
     private float lastSpawnHeight = 0;
     private float spawnX;
 
-    private float timer;
+    private float platTimer;
     public float minTime;
     public float maxTime;
+    private float coinTimer;
+    public float coinTime;
 
     public float lossDist;
 
@@ -42,12 +44,26 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if(timer <= 0)
+        platTimer -= Time.deltaTime;
+        coinTimer -= Time.deltaTime;
+        if(platTimer <= 0)
         {
             SpawnPlatform();
-            timer = Random.Range(minTime, maxTime);
+            platTimer = Random.Range(minTime, maxTime);
         }
+
+        if(coinTimer <= 0)
+        {
+            coinTimer = coinTime;
+            GameObject newCoin = Instantiate(coin);
+            newCoin.transform.parent = null;
+            int rand = Random.Range(0, 2);
+            if(rand == 0)
+                newCoin.transform.position = new Vector2(spawnX, lastSpawnHeight + coinHeight);
+            else if (rand == 1)
+                newCoin.transform.position = new Vector2(spawnX, lastSpawnHeight + coinHeight2);
+        }
+
         if(Vector2.Distance(player.transform.position, lastPlatform.transform.position) > lossDist)
         {
             SceneManager.LoadScene(lossSceneIndex);
@@ -65,9 +81,9 @@ public class GameManager : MonoBehaviour
             else if (dif >= 0)
                 dif = spawnHeightMinDist;
         }
-        plat.transform.position = new Vector2(spawnX, lastSpawnHeight + dif);
-        plat.transform.parent = null;
         plat.transform.localScale = new Vector3(Random.Range(platormLengthMin, platormLengthMax), plat.transform.localScale.y, plat.transform.localScale.z);
+        plat.transform.position = new Vector2(spawnX + plat.transform.localScale.x / 2, lastSpawnHeight + dif);
+        plat.transform.parent = null;
         lastSpawnHeight += dif;
         lastPlatform = plat;
     }
