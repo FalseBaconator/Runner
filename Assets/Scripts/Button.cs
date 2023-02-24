@@ -9,4 +9,10 @@ public class Button : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+    public void ResetScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        SwitchScene(0);
+    }
 }
