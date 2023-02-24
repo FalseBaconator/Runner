@@ -15,4 +15,10 @@ public class Button : MonoBehaviour
         PlayerPrefs.DeleteKey("HighScore");
         SwitchScene(0);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }
